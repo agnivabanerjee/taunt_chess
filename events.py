@@ -212,6 +212,49 @@ EVENTS: List[EventDef] = [
         trigger=king_ring_breach,
         taunt=taunt_text("Warning: your king’s ring will be breached within {k} plies. (≈{p}%)"),
     ),
+    EventDef(
+        key="give_check",
+        label="Give check",
+        trigger=give_check,
+        taunt=taunt_text("Prophecy: I’ll check your king within {k} plies. (≈{p}%)"),
+    ),
+    EventDef(
+        key="capture_pawn",
+        label="Capture a pawn",
+        trigger=capture_pawn,
+        taunt=taunt_text("Omen: I’ll snatch a pawn within {k} plies. (≈{p}%)"),
+    ),
+    EventDef(
+        key="attack_queen",
+        label="Attack your queen",
+        trigger=attack_enemy_queen,
+        taunt=taunt_text("Warning: your queen will be under fire within {k} plies. (≈{p}%)"),
+    ),
+    EventDef(
+        key="center_entry",
+        label="Invade the center",
+        trigger=center_entry,
+        taunt=taunt_text("Sign: I’ll plant a piece deep in the center within {k} plies. (≈{p}%)"),
+    ),
+    EventDef(
+        key="ring_poke",
+        label="Poke the king’s ring",
+        trigger=ring_poke,
+        taunt=taunt_text("Foresight: pressure on your king will increase within {k} plies. (≈{p}%)"),
+    ),
+    EventDef(
+        key="pawn_to_5th",
+        label="Pawn reaches the 5th",
+        trigger=pawn_to_fifth,
+        taunt=taunt_text("I foresee a pawn storm—one reaches the 5th within {k} plies. (≈{p}%)"),
+    ),
+    # Optional—keep if you want even more action
+    EventDef(
+        key="rook_open_file",
+        label="Rook to an open file",
+        trigger=rook_on_open_file,
+        taunt=taunt_text("I’ll seize an open file with my rook within {k} plies. (≈{p}%)"),
+    ),
 ]
 
 EASY_EVENTS: List[EventDef] = [
