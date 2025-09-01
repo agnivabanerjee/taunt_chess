@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "taunt-chess"
+version = "0.1.0"
+description = "A head-to-head between a strong Stockfish and a weaker Stockfish where the strong side taunts with prophecies and steers toward making them come true"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "python-chess>=1.999",
+]
+
+[project.scripts]
+taunt-match = "match:main"
+
+[project.urls]
+Homepage = "https://github.com/agniva/taunt_chess"
+Repository = "https://github.com/agniva/taunt_chess"
+
+[tool.uv]
+dev-dependencies = [
+    # Add development dependencies here if needed
+    # "pytest>=6.0",
+    # "black",
+    # "flake8",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["*.py"]

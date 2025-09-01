@@ -1,4 +1,4 @@
-# Taunting Stockfish – Cinematic Chess Prophecies
+m# Taunting Stockfish – Cinematic Chess Prophecies
 
 A head-to-head between a strong Stockfish and a weaker Stockfish where the strong side **taunts** with “prophecies” (predicted tactical/positional events) and **steers** toward making them come true. Includes a fast **shared look-ahead tree** (reuse mode) with **motif-aware widening**, or a classic “per-event” search (legacy mode). Progress bars and an event-odds panel are available for debugging.
 
@@ -11,18 +11,43 @@ A head-to-head between a strong Stockfish and a weaker Stockfish where the stron
 
 ## Install
 
+### Using uv (recommended)
+
+```bash
+# Install uv if not already installed
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Clone the repository and setup
+git clone https://github.com/agniva/taunt_chess
+cd taunt_chess
+
+# Install dependencies with uv (creates virtual environment automatically)
+uv sync
+
+# Activate the environment (if needed)
+# uv shell
+
+# Run the project
+uv run python match.py --unicode-board
+```
+
+### Alternative: Using pip
+
 ```bash
 # in a fresh virtualenv is recommended
 pip install python-chess
 
 # optional: pin
 # pip install "python-chess>=1.999"
-
-# ensure stockfish is installed and visible:
-# macOS (brew): brew install stockfish
-# Ubuntu: sudo apt-get install stockfish
-# or download a release and export STOCKFISH_PATH
 ```
+
+### System Requirements
+
+Ensure Stockfish is installed and visible:
+* **macOS (brew)**: `brew install stockfish`
+* **Ubuntu**: `sudo apt-get install stockfish`  
+* **Windows**: Download from [Stockfish releases](https://stockfishchess.org/download/) and add to PATH
+* **Alternative**: Set `STOCKFISH_PATH=/path/to/stockfish` environment variable
 
 ## Project layout (key files)
 
@@ -40,25 +65,25 @@ match.py             # CLI entry point to run a game and watch prophecies unfold
 Run with defaults (strong plays White, weak plays Black):
 
 ```bash
-python match.py --unicode-board
+uv run python match.py --unicode-board
 ```
 
 See progress bars & markers:
 
 ```bash
-python match.py --unicode-board --debug
+uv run python match.py --unicode-board --debug
 ```
 
 Use **higher-frequency test events** (great for demos):
 
 ```bash
-python match.py --easy-events --unicode-board --debug
+uv run python match.py --easy-events --unicode-board --debug
 ```
 
 Show the **per-event probability** panel each ply:
 
 ```bash
-python match.py --show-event-probs --unicode-board
+uv run python match.py --show-event-probs --unicode-board
 ```
 
 ## Modes
@@ -68,7 +93,7 @@ python match.py --show-event-probs --unicode-board
 Build one shared look-ahead tree per scan; compute all event odds at once; reuse for steering.
 
 ```bash
-python match.py --reuse --unicode-board --show-event-probs --debug
+uv run python match.py --reuse --unicode-board --show-event-probs --debug
 ```
 
 Tuning (defaults shown):
@@ -85,7 +110,7 @@ Tuning (defaults shown):
 Restores the original behavior where each event is searched separately (slower, but useful for testing search heuristics). **Do not pass `--reuse`.**
 
 ```bash
-python match.py --unicode-board --debug
+uv run python match.py --unicode-board --debug
 ```
 
 If you want steering to scan only on schedule (not every move), add:
@@ -102,7 +127,7 @@ If you want steering to scan only on schedule (not every move), add:
 Select easy set:
 
 ```bash
-python match.py --easy-events
+uv run python match.py --easy-events
 ```
 
 ## Scheduling scans
@@ -111,10 +136,10 @@ Only scan/announce prophecies every **K** moves:
 
 ```bash
 # every 10 full moves (move numbers 1, 11, 21, …)
-python match.py --scan-every-fullmoves 10
+uv run python match.py --scan-every-fullmoves 10
 
 # every 30 plies (half-moves) – overrides fullmove schedule
-python match.py --scan-every-plies 30
+uv run python match.py --scan-every-plies 30
 ```
 
 To ensure steering doesn’t do extra scans between scheduled scans:
@@ -130,7 +155,7 @@ To ensure steering doesn’t do extra scans between scheduled scans:
 * After a prophecy **fulfills/averts**, the same event is **temporarily banned** from retargeting to keep variety. Control the window:
 
 ```bash
-python match.py --avoid-retarget-plies 6
+uv run python match.py --avoid-retarget-plies 6
 ```
 
 (Defaults to the prophecy horizon.)
@@ -167,7 +192,7 @@ python match.py --avoid-retarget-plies 6
 Reuse + easy events + panel:
 
 ```bash
-python match.py --reuse --easy-events --show-event-probs \
+uv run python match.py --reuse --easy-events --show-event-probs \
   --strong-as white --strong-depth 16 --weak-depth 8 --weak-skill 2 \
   --unicode-board --debug
 ```
@@ -175,7 +200,7 @@ python match.py --reuse --easy-events --show-event-probs \
 Legacy + frequent scans + progress bars:
 
 ```bash
-python match.py --easy-events --scan-every-fullmoves 1 \
+uv run python match.py --easy-events --scan-every-fullmoves 1 \
   --strong-as white --strong-depth 16 --weak-depth 8 --weak-skill 2 \
   --unicode-board --debug
 ```
