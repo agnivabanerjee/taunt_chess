@@ -1,4 +1,4 @@
-m# Taunting Stockfish – Cinematic Chess Prophecies
+# Taunting Stockfish – Cinematic Chess Prophecies
 
 A head-to-head between a strong Stockfish and a weaker Stockfish where the strong side **taunts** with “prophecies” (predicted tactical/positional events) and **steers** toward making them come true. Includes a fast **shared look-ahead tree** (reuse mode) with **motif-aware widening**, or a classic “per-event” search (legacy mode). Progress bars and an event-odds panel are available for debugging.
 
